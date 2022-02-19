@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Page{% endblock title %}
+
+{% block data %} 
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Register</button>
+        <br><br>
+    </form>
+{% endblock data %}
