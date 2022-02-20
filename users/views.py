@@ -9,4 +9,9 @@ from .forms import SignUpForm
 class SignUpView(CreateView):
     form_class = SignUpForm
     model = Lifter
-    template_name = 'signup.html'
+    template_name = 'auth/signup.html'
+    
+    
+def login_view(request):
+    if request.method == "GET":
+        return render(request, template_name='auth/login.html')
