@@ -8,5 +8,5 @@ from .forms import SignUpForm
 # Sign Up View
 class SignUpView(CreateView):
     form_class = SignUpForm
-    # success_url = reverse_lazy('login')
+    model = Lifter
     template_name = 'signup.html'

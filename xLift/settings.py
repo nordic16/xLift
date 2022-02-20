@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
  
     'users',
-    'base'
+    'base',
+    'crispy_forms'
 ]
 
 MIDDLEWARE = [
@@ -119,7 +120,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
-
+STATICFILES_DIRS = (str(BASE_DIR / "static"),)
 STATIC_URL = '/static/'
 
 # Default primary key field type
@@ -128,3 +129,5 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "users.Lifter"
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
