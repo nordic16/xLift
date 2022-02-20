@@ -10,13 +10,7 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = Lifter
         fields = ['username', 'email', 'password1', 'password2']
-                
-        help_texts = {
-            'username' : None,
-            'email' : None,
-            'password confirmation' : None,
-            'register' : None
-        }
+
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

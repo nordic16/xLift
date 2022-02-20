@@ -6,6 +6,5 @@ urlpatterns = [
     path('workouts/', workouts_page, name='workouts'),
     path('profile/', profile_page, name='profile'),
     
-    path('lifters/', include('users.urls')),
- 
+    path('lifters/', include('users.urls'))
 ]

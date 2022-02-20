@@ -5,6 +5,8 @@ from .models import Lifter
 
 # Register your models here.
 class CustomUserAdmin(UserAdmin):
+    pass
+
     model = Lifter
     list_display = ['email', 'username']
 
