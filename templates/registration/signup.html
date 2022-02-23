@@ -10,6 +10,7 @@
 {% block data %} 
     <br>
     <div class="container", style="width: 350px;">
+        {% csrf_token %}
         {% crispy form %}
     </div>
 {% endblock %}

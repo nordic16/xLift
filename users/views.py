@@ -1,10 +1,7 @@
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
 from .forms import *
-from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView
+from django.contrib.auth.views import LoginView
 from .forms import SignUpForm
-from django.views.generic import TemplateView
+from django.views.generic import CreateView
 
 # Sign Up View
 class SignUpView(CreateView):
@@ -12,3 +9,11 @@ class SignUpView(CreateView):
     model = Lifter
     template_name = 'registration/signup.html'
     success_url="/"
+    
+    
+class LoginView(LoginView):
+    form_class = LoginForm
+    template_name = 'registration/login.html'
+    
+    def get_success_url(self):
+        return '/'
