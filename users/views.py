@@ -24,8 +24,3 @@ class LoginView(LoginView):
 
 class LogoutView(LogoutView):
     pass
-
-
-# CHANGE THIS LMAO
-def ProfileView(request):
-    return render(request, 'profile.html')

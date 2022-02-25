@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}Dashboard dashboard{% endblock %}
+
+{% block data %} 
+    <br>
+    <div class="container-fluid">
+        <h1>Hello, {{user.username}}</h1>
+
+        <div class="container">
+            <div class="row">
+              <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Profile</h5>
+                      <p class="card-text">Username: {{ user.username }}</p>
+                      <p class="card-text">Age: 16</p>
+                      <p class="card-text">Weight: 60kg</p>
+                      <a href="#" class="btn btn-primary">Update profile</a>
+                    </div>
+                  </div>
+              </div>
+
+              <div class="col">
+                <div class="card" style="width: 18rem;">
+                  <img src="..." class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">Last Workout</h5>
+                    <p class="card-text">Duration: 60min</p>
+                    <p class="card-text">Intensity: Hard</p>
+                    <p class="card-text">Type: Legs</p>
+                    <a href="#" class="btn btn-primary">View last workout</a>                    
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>            
+    </div>
+{% endblock %}

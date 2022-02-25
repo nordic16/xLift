@@ -18,3 +18,7 @@
 .nav-link:hover, .active:hover {
     color: #f5f3f4 !important;
 }
+
+.card-text {
+    margin-top: 1px;
+}

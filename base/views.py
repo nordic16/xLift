@@ -12,3 +12,7 @@ def workouts_page(request):
     if request.method == 'GET':
         return render(request, template_name='workouts.html')
     
+
+# CHANGE THIS LMAO
+def DashboardView(request):
+    return render(request, 'dashboard.html', context={'user' : request.user})
