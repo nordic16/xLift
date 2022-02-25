@@ -11,3 +11,10 @@
     border-color: #e5383b !important;
 }
 
+.nav-link, .active {
+    color: #d3d3d3 !important;
+}
+
+.nav-link:hover, .active:hover {
+    color: #f5f3f4 !important;
+}
