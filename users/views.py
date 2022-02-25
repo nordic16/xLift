@@ -1,7 +1,10 @@
 from .forms import *
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
+from django.forms import ModelForm
 from .forms import SignUpForm
 from django.views.generic import CreateView
+from django.views import View
+from django.shortcuts import redirect, render
 
 # Sign Up View
 class SignUpView(CreateView):
@@ -17,3 +20,12 @@ class LoginView(LoginView):
     
     def get_success_url(self):
         return '/'
+
+
+class LogoutView(LogoutView):
+    pass
+
+
+# CHANGE THIS LMAO
+def ProfileView(request):
+    return render(request, 'profile.html')

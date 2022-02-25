@@ -3,17 +3,13 @@
 {% load crispy_forms_tags %}
 
 {% block title %}Login Page{% endblock %}
-{% block stylesheet %}
-<link rel="stylesheet" href="{% static 'css/base.css' %}">
-{% endblock %}
+
 
 {% block data %} 
     <br>
     <div class="container", style="width: 350px;">
-        <form method="post">
-            {% csrf_token %}
-            {% crispy form %}
-            <a href={% url 'home' %} class="btn btn-danger">Cancel</a>
-        </form>
+        {% csrf_token %}
+        {% crispy form %}
+        <a href={% url 'home' %} class="btn btn-danger">Cancel</a>
     </div>
 {% endblock %}

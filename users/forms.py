@@ -37,4 +37,3 @@ class LoginForm(AuthenticationForm):
         
         self.helper.form_method = 'post'
         self.helper.add_input(Submit('submit', 'Login'))
-
