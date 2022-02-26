@@ -20,7 +20,3 @@ class LoginView(LoginView):
     
     def get_success_url(self):
         return '/'
-
-
-class LogoutView(LogoutView):
-    pass

@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
 {% block data %}
-<div align="center">
-    <br>
-    <h1>Welcome to xLift, your workout tracker!</h1>
+{% load static %}
 
-    <strong><p>Easily keep track of your workout sessions through this amazing app!</p></strong>
+<div class="container-fluid">
+  {% if user.is_authenticated %}
+    <h1 class="greet">Hello, {{ user.username }}</h1>
+  {% else %}
+    <h1 class="greet">Hello!</h1>
+    <h2 class="greet">New to xLift? <a href="{% url 'login' %}">Login</a>or <a href="{% url 'signup' %}">sign up!</a></h2>
+  {% endif %}
 </div>
 {% endblock %}

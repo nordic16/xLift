@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+
 .form-control {
     margin-bottom: 20px;
 }
@@ -7,7 +9,7 @@
 }
 
 .btn, .btn-primary {
-    background-color: #e5383b !important;
+    background-color: #e5183b !important;
     border-color: #e5383b !important;
 }
 

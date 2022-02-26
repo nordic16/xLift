@@ -13,6 +13,5 @@ def workouts_page(request):
         return render(request, template_name='workouts.html')
     
 
-# CHANGE THIS LMAO
 def DashboardView(request):
     return render(request, 'dashboard.html', context={'user' : request.user})
