@@ -1,5 +1,6 @@
 from .forms import *
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import LoginView
+from django.contrib.auth import logout
 from django.forms import ModelForm
 from .forms import SignUpForm
 from django.views.generic import CreateView
@@ -20,3 +21,11 @@ class LoginView(LoginView):
     
     def get_success_url(self):
         return '/'
+    
+    
+def logout_view(request):
+    if request.method == 'POST':
+        logout(request)
+        return redirect('/')
+
+    return render(request, 'registration/logout.html')

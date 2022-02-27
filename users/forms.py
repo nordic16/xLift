@@ -1,8 +1,10 @@
 from django import forms
-from django.contrib.auth.models import User
+from django.shortcuts import reverse
 from django.contrib.auth.forms import UserCreationForm, ReadOnlyPasswordHashField, AuthenticationForm
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
+from crispy_forms.bootstrap import FormActions
+
+from crispy_forms.layout import Submit, Button
 from .models import Lifter
 
 
@@ -20,11 +22,17 @@ class SignUpForm(UserCreationForm):
         self.helper.form_method = 'post'
         self.helper.add_input(Submit('submit', 'Sign Up'))
         
+        # It just works
+        self.helper.add_input(Button('cancel', 'Cancel', css_class='btn-primary',
+             onclick="window.location.href = '{}';".format(reverse('home'))))
+        
         self.fields['password1'].help_text = None
         self.fields['password2'].help_text = None
         self.fields['email'].help_text = None
         self.fields['username'].help_text = None
         
+
+
 
 # Sign Up Form
 class LoginForm(AuthenticationForm):
@@ -37,3 +45,6 @@ class LoginForm(AuthenticationForm):
         
         self.helper.form_method = 'post'
         self.helper.add_input(Submit('submit', 'Login'))
+        
+        self.helper.add_input(Button('cancel', 'Cancel', css_class='btn-primary',
+             onclick="window.location.href = '{}';".format(reverse('home'))))

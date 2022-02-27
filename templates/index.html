@@ -1,13 +1,12 @@
 {% extends 'base.html' %}
 {% block data %}
-{% load static %}
 
 <div class="container-fluid">
   {% if user.is_authenticated %}
     <h1 class="greet">Hello, {{ user.username }}</h1>
   {% else %}
     <h1 class="greet">Hello!</h1>
-    <h2 class="greet">New to xLift? <a href="{% url 'login' %}">Login</a>or <a href="{% url 'signup' %}">sign up!</a></h2>
+    <h2 class="greet">New to xLift? <a class="link-text" href="{% url 'signup' %}">Join the Dark Side!</a></h2>
   {% endif %}
 </div>
 {% endblock %}

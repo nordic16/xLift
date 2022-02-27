@@ -9,7 +9,7 @@
 }
 
 .btn, .btn-primary {
-    background-color: #e5183b !important;
+    background-color: #e5383b !important;
     border-color: #e5383b !important;
 }
 
@@ -21,6 +21,23 @@
     color: #f5f3f4 !important;
 }
 
+.d-flex a {
+    margin-left: 10px;
+}
+
 .card-text {
     margin-top: 1px;
+}
+
+.auth-text {
+    color: #e5383b
+}
+
+.link-text {
+    text-decoration-color: #ba181b;
+    color: #ba181b;
+}
+
+.link-text:hover {
+    color: #e5383b;
 }

@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
 {% load crispy_forms_tags %}
-
 {% block title %}Login Page{% endblock %}
 
 
@@ -10,6 +8,7 @@
     <div class="container", style="width: 350px;">
         {% csrf_token %}
         {% crispy form %}
-        <a href={% url 'home' %} class="btn btn-danger">Cancel</a>
+        <br>
+        <code class="auth-text">Don't have an account? <a class="link-text" href="{% url 'signup' %}">Sign up!</a></code>
     </div>
 {% endblock %}

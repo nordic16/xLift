@@ -10,5 +10,7 @@
     <div class="container", style="width: 350px;">
         {% csrf_token %}
         {% crispy form %}
+        <br>
+        <code class="auth-text">Already have an account? <a class="link-text" href="{% url 'login' %}">Log in!</a></code>
     </div>
 {% endblock %}

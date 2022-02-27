@@ -5,13 +5,14 @@
 {% block title %}XLift - Dashboard{% endblock %}
 
 {% block data %} 
+  {% if user.is_authenticated %}
     <br>
     <div class="container-fluid">
         <h1>Hello, {{user.username}}</h1>
 
         <div class="container">
             <div class="row">
-              <div class="col">
+        T      <div class="col">
                 <div class="card" style="width: 18rem;">
                     <img src="..." class="card-img-top" alt="...">
                     <div class="card-body">
@@ -39,4 +40,12 @@
           </div>
         </div>            
     </div>
+  {% else %}
+  <div class="container-fluid">
+    <br>
+    <h1>The Force is with you, young Skywalker, but you are not a Jedi yet.</h1>
+    <h6><a class="link-text" href="{% url 'login' %}">login page</a></h6>
+  </div>
+  
+  {% endif %}
 {% endblock %}

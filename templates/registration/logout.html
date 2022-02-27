@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% block data %}
 <br>
 <div class="container-sm">
@@ -10,8 +9,11 @@
     <div class="card-body">
       <h5 class="card-title">Are you sure you want to proceed?</h5>
       <br>
-      <a href="{% url 'home' %}" class="btn btn-secondary">No, take me back!</a>
-      <button class="btn btn-primary" type="submit">Yes, my Lord.</button>
+      <form method="post">
+        <a href="{% url 'home' %}" class="btn btn-secondary">No, take me back!</a>
+        {% csrf_token %}
+        <button class="btn btn-primary" type="submit">Yes, my Lord.</button>
+      </form>
     </div>
 </div>
 </div>
