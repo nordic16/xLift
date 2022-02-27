@@ -12,7 +12,7 @@ from .models import Lifter
 class SignUpForm(UserCreationForm):
     class Meta:
         model = Lifter
-        fields = ['username', 'email', 'password1', 'password2']
+        fields = ['username', 'email', 'password1', 'password2', 'weight', 'height', 'date_of_birth']
 
     
     def __init__(self, *args, **kwargs):

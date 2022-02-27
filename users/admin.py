@@ -1,12 +1,12 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
-from django.contrib.auth.models import Group, User
+# from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import Group
 from .models import Lifter
 
-# Register your models here.
-class CustomUserAdmin(UserAdmin):
-    model = Lifter
+
+@admin.register(Lifter)
+class CustomUserAdmin(admin.ModelAdmin):
+    pass
 
 
-admin.site.register(Lifter, CustomUserAdmin)
 admin.site.unregister(Group)
