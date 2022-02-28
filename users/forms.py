@@ -1,5 +1,6 @@
 from django import forms
 from django.shortcuts import reverse
+from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm, ReadOnlyPasswordHashField, AuthenticationForm
 from crispy_forms.helper import FormHelper
 from crispy_forms.bootstrap import FormActions
@@ -31,7 +32,6 @@ class SignUpForm(UserCreationForm):
         self.fields['email'].help_text = None
         self.fields['username'].help_text = None
         
-
 
 
 # Sign Up Form
