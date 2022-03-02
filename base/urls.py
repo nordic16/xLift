@@ -6,5 +6,6 @@ urlpatterns = [
     path('workouts/', workouts_page, name='workouts'),    
     path('lifters/', include('users.urls')),
     path('dashboard/', DashboardView, name='dashboard'),
-    path('profile/', profile_view, name='profile')
+    path('profile/', profile_view, name='profile'),
+    path('profile/<str:username>', profile_view, name='profile')
 ]

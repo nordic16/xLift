@@ -15,7 +15,9 @@
         <p>Current height: {{ user.height }}cm</p>
         <p>Current weight: {{ user.weight }}kg</p>
         <p>Age: {{ user.age }} years old</p>
-        {% crispy form %}
+        {% if form %}
+            {% crispy form %}
+        {% endif %}
 
         <a class="link-text" href="{% url 'password_reset' %}">Change your password</a></code>
     </div>

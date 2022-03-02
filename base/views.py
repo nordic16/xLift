@@ -1,6 +1,6 @@
 from .models import *
 from .forms import ProfileForm
-
+from users.models import Lifter
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render, reverse
 
@@ -19,26 +19,29 @@ def DashboardView(request):
     return render(request, 'dashboard.html', context={'user' : request.user})
 
 
-def profile_view(request):
+def profile_view(request, username=None):
+    if not username:
+        user = request.user
+    else:
+        user = Lifter.objects.get(username=username)
+    
     if request.method == 'POST':
         form = ProfileForm(data=request.POST)
         
         if form.is_valid():
             data = form.cleaned_data
-            user = request.user
             
             user.first_name = data['first_name']
             user.last_name = data['last_name']
             user.date_of_birth = data['date_of_birth']
             user.weight = data['weight']
             user.height = data['height']
-            
             user.save()
         
             return redirect(reverse(index_page)) 
         
-    
     else:
-        x = ProfileForm()
-        
-        return render(request, 'profile.html', context={'form' : x})
+        # Prevents people from editing other user's profiles.
+        form = ProfileForm() if user is request.user else None
+        return render(request, 'profile.html', context={
+            'form' : form, 'user' : user})
