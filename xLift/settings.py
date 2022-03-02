@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-%z6pnqja$k8#0(8=5$itw)mu^g_w!0b6%x)ggyd-p!21drwl4!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -40,7 +40,7 @@ INSTALLED_APPS = [
  
     'users',
     'base',
-    'crispy_forms'
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -128,9 +128,7 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# custom
 AUTH_USER_MODEL = "users.Lifter"
-
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
 LOGIN_REDIRECT_URL = '/'
-# LOGOUT_REDIRECT_URL = '/'

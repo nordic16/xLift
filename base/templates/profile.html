@@ -17,9 +17,8 @@
         <p>Age: {{ user.age }} years old</p>
         {% if form %}
             {% crispy form %}
+            <a class="link-text" href="{% url 'password_reset' %}">Change your password</a></code>
         {% endif %}
-
-        <a class="link-text" href="{% url 'password_reset' %}">Change your password</a></code>
     </div>
 </div>  
 {% endblock %}

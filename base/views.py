@@ -2,7 +2,7 @@ from .models import *
 from .forms import ProfileForm
 from users.models import Lifter
 from django.http import HttpResponseRedirect
-from django.shortcuts import redirect, render, reverse
+from django.shortcuts import redirect, render, reverse, get_object_or_404
 
 
 def index_page(request):
@@ -23,7 +23,7 @@ def profile_view(request, username=None):
     if not username:
         user = request.user
     else:
-        user = Lifter.objects.get(username=username)
+        user = get_object_or_404(Lifter, username=username)
     
     if request.method == 'POST':
         form = ProfileForm(data=request.POST)
@@ -45,3 +45,9 @@ def profile_view(request, username=None):
         form = ProfileForm() if user is request.user else None
         return render(request, 'profile.html', context={
             'form' : form, 'user' : user})
+        
+
+
+# EXCEPTIONS
+def page_not_found_view(request, exception):
+     return render(request,'errors/404.html')
