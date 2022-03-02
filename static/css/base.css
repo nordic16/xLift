@@ -41,3 +41,14 @@
 .link-text:hover {
     color: #e5383b;
 }
+
+.profile-fields {
+    margin: 0 auto;
+    padding-top: 5px;
+    text-align: left;
+}
+
+.profile-fields p {
+    margin-top: 1px;
+    padding-left: 20px;
+}

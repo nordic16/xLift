@@ -13,7 +13,7 @@ from .models import Lifter
 class SignUpForm(UserCreationForm):
     class Meta:
         model = Lifter
-        fields = ['username', 'email', 'password1', 'password2', 'weight', 'height', 'date_of_birth']
+        fields = ['username', 'email', 'password1', 'password2']
 
     
     def __init__(self, *args, **kwargs):
@@ -21,7 +21,7 @@ class SignUpForm(UserCreationForm):
         self.helper = FormHelper(self)
         
         self.helper.form_method = 'post'
-        self.helper.add_input(Submit('submit', 'Sign Up'))
+        self.helper.add_input(Submit('submit', 'Continue'))
         
         # It just works
         self.helper.add_input(Button('cancel', 'Cancel', css_class='btn-primary',
@@ -32,7 +32,6 @@ class SignUpForm(UserCreationForm):
         self.fields['email'].help_text = None
         self.fields['username'].help_text = None
         
-
 
 # Sign Up Form
 class LoginForm(AuthenticationForm):
@@ -48,3 +47,5 @@ class LoginForm(AuthenticationForm):
         
         self.helper.add_input(Button('cancel', 'Cancel', css_class='btn-primary',
              onclick="window.location.href = '{}';".format(reverse('home'))))
+        
+    

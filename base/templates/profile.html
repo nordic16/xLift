@@ -4,9 +4,20 @@
 {% block title %}xLift - Profile{% endblock %}
 
 {% block data %}
-<h1>Profile</h1>
-<div class="container", style="width: 350px;">
+<div class="container-fluid">
     {% csrf_token %}
-    {% crispy form %}
+    <div class="profile-fields container">
+        <h1>Profile</h1>
+        <p>Username: {{ user.username }}</p>
+        <p>First name: {{ user.first_name }}</p>
+        <p>Last name: {{ user.last_name }}</p>
+        <p>Date of birth: {{ user.date_of_birth }}</p>
+        <p>Current height: {{ user.height }}cm</p>
+        <p>Current weight: {{ user.weight }}kg</p>
+        <p>Age: {{ user.age }} years old</p>
+        {% crispy form %}
+
+        <a class="link-text" href="{% url 'password_reset' %}">Change your password</a></code>
+    </div>
 </div>  
 {% endblock %}

@@ -9,16 +9,21 @@ from django.shortcuts import reverse
 class ProfileForm(ModelForm):
     class Meta:
         model = Lifter
-        fields = ['first_name', 'last_name', 'username', 'password']
+        fields = ['first_name', 'last_name', 'date_of_birth', 'height', 'weight']
+        
         
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper(self)
-        
+                
         self.helper.form_method = 'post'
         self.helper.add_input(Submit('submit', 'Save Changes'))
         
         self.helper.add_input(Button('cancel', 'Cancel', css_class='btn-primary',
-             onclick="window.location.href = '{}';".format(reverse('home'))))    
+             onclick="window.location.href = '{}';".format(reverse('home'))))   
+        
+        # Sets every field as required
+        for key in self.fields:
+            self.fields[key].required = True
 
     

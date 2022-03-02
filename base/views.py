@@ -2,7 +2,7 @@ from .models import *
 from .forms import ProfileForm
 
 from django.http import HttpResponseRedirect
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, reverse
 
 
 def index_page(request):
@@ -21,7 +21,22 @@ def DashboardView(request):
 
 def profile_view(request):
     if request.method == 'POST':
-        pass
+        form = ProfileForm(data=request.POST)
+        
+        if form.is_valid():
+            data = form.cleaned_data
+            user = request.user
+            
+            user.first_name = data['first_name']
+            user.last_name = data['last_name']
+            user.date_of_birth = data['date_of_birth']
+            user.weight = data['weight']
+            user.height = data['height']
+            
+            user.save()
+        
+            return redirect(reverse(index_page)) 
+        
     
     else:
         x = ProfileForm()
