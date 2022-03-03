@@ -9,7 +9,7 @@ from django.shortcuts import reverse
 class ProfileForm(ModelForm):
     class Meta:
         model = Lifter
-        fields = ['first_name', 'last_name', 'date_of_birth', 'height', 'weight']
+        fields = ['first_name', 'last_name', 'date_of_birth', 'height', 'weight', 'workouts_per_week']
         
         
     def __init__(self, *args, **kwargs):
