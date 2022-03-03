@@ -42,7 +42,7 @@ def profile_view(request, username=None):
         
     else:
         # Prevents people from editing other user's profiles.
-        form = ProfileForm() if user is request.user else None
+        form = ProfileForm() if user.id is request.user.id else None
         return render(request, 'profile.html', context={
             'form' : form, 'user' : user})
         
@@ -50,4 +50,4 @@ def profile_view(request, username=None):
 
 # EXCEPTIONS
 def page_not_found_view(request, exception):
-     return render(request,'errors/404.html')
+     return render(request, 'errors/404.html')
