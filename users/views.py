@@ -1,13 +1,14 @@
 from .forms import *
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetForm
 from django.contrib.auth import logout, login
 from django.forms import ModelForm
 from .forms import SignUpForm
 from base.forms import ProfileForm
 from django.views.generic import CreateView
 from django.views import View
-from django.shortcuts import redirect, render, reverse
-
+from django.shortcuts import redirect, render
+from django.contrib.messages.views import SuccessMessageMixin
+from django.urls import reverse_lazy
 
 # Sign Up View
 class SignUpView(CreateView):
@@ -16,23 +17,8 @@ class SignUpView(CreateView):
     template_name = 'registration/signup.html'
     success_url="/"
     
-    def post(self, request):
-        form = SignUpForm(request.POST)  
-        if form.is_valid():
-            data = form.cleaned_data
-            user = Lifter.objects.create(
-                username=data['username'], email=data['email'], 
-                password=data['password1'])
-                    
-            user.save()
-            login(request, user)
+    
             
-            form = ProfileForm() 
-            print(form.fields)
-            return render(request, 'profile.html', context={'form' : form, 'user' : user})
-            
-        else:
-            print(form.error_messages)
         
     
 class LoginView(LoginView):

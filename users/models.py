@@ -34,9 +34,7 @@ class Lifter(AbstractUser):
     USERNAME_FIELD = 'username'
         
     def __str__(self):
-        return f"|{self.username}{self.email}"
-    
-    
+        return f"|{self.username}{self.email}"    
 
 @receiver(pre_save, sender=Lifter)
 def calculate_age(sender, instance, raw=False, **kwargs):

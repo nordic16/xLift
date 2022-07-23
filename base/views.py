@@ -2,7 +2,8 @@ from .models import *
 from .forms import ProfileForm
 from users.models import Lifter
 from django.http import HttpResponseRedirect
-from django.shortcuts import redirect, render, reverse, get_object_or_404
+from django.shortcuts import redirect, render, get_object_or_404
+from django.urls import reverse_lazy
 
 
 def index_page(request):
@@ -30,7 +31,8 @@ def profile_view(request, username=None):
         
         if form.is_valid():
             data = form.cleaned_data
-            
+
+            # Might want to fix this later lmao            
             user.first_name = data['first_name']
             user.last_name = data['last_name']
             user.date_of_birth = data['date_of_birth']
@@ -38,7 +40,7 @@ def profile_view(request, username=None):
             user.height = data['height']
             user.save()
         
-            return redirect(reverse(index_page)) 
+            return redirect(reverse_lazy('home')) 
         
     else:
         # Prevents people from editing other user's profiles.
@@ -46,7 +48,6 @@ def profile_view(request, username=None):
         return render(request, 'profile.html', context={
             'form' : form, 'user' : user})
         
-
 
 # EXCEPTIONS
 def page_not_found_view(request, exception):

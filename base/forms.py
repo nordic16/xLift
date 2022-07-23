@@ -5,7 +5,6 @@ from crispy_forms.bootstrap import FormActions
 from crispy_forms.layout import Submit, Button
 from django.shortcuts import reverse
 
-
 class ProfileForm(ModelForm):
     class Meta:
         model = Lifter
