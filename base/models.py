@@ -1,4 +1,5 @@
 from django.db import models
+from users.models import Lifter
 
 
 INTENSITY_CHOICES = (
@@ -18,8 +19,13 @@ WORKOUT_CATEGORIES = (
 class Workout(models.Model):
     intensity = models.CharField(choices=INTENSITY_CHOICES, max_length=22, default="Weighted")
     name = models.CharField(max_length=32)
-    notes = models.TextField(max_length=500)
+    notes = models.TextField(max_length=500, blank=True)
+    owner = models.ForeignKey(Lifter, on_delete=models.CASCADE, null=True)
+    active = models.BooleanField(default=True)
     
+    
+    def __str__(self):
+        return self.name
 
 class Exercise(models.Model):
     name = models.CharField(max_length=32)

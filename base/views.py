@@ -1,5 +1,5 @@
 from .models import *
-from .forms import ProfileForm
+from .forms import WorkoutForm
 from users.models import Lifter
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render, get_object_or_404
@@ -20,35 +20,29 @@ def DashboardView(request):
     return render(request, 'dashboard.html', context={'user' : request.user})
 
 
-def profile_view(request, username=None):
-    if not username:
-        user = request.user
+def new_workout(request):
+    user = request.user
+    if request.method == 'GET':    
+        form = WorkoutForm()
+        
+        if user.is_authenticated:
+            return render(request, 'workout_creation.html', context={'form' : form})
+
     else:
-        user = get_object_or_404(Lifter, username=username)
-    
-    if request.method == 'POST':
-        form = ProfileForm(data=request.POST)
+        form = WorkoutForm(request.POST)
         
         if form.is_valid():
             data = form.cleaned_data
 
-            # Might want to fix this later lmao            
-            user.first_name = data['first_name']
-            user.last_name = data['last_name']
-            user.date_of_birth = data['date_of_birth']
-            user.weight = data['weight']
-            user.height = data['height']
-            user.save()
+            Workout.objects.create(intensity=data['intensity'],
+            name=data['name'],
+            notes=data['notes'],
+            owner=user)
         
-            return redirect(reverse_lazy('home')) 
-        
-    else:
-        # Prevents people from editing other user's profiles.
-        form = ProfileForm() if user.id is request.user.id else None
-        return render(request, 'profile.html', context={
-            'form' : form, 'user' : user})
-        
+            return render(request, 'temp.html')
 
 # EXCEPTIONS
 def page_not_found_view(request, exception):
      return render(request, 'errors/404.html')
+ 
+

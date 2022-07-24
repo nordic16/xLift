@@ -8,7 +8,6 @@ from crispy_forms.bootstrap import FormActions
 from crispy_forms.layout import Submit, Button
 from .models import Lifter
 
-
 # Sign Up Form
 class SignUpForm(UserCreationForm):
     class Meta:
@@ -27,13 +26,11 @@ class SignUpForm(UserCreationForm):
         self.helper.add_input(Button('cancel', 'Cancel', css_class='btn-primary',
              onclick="window.location.href = '{}';".format(reverse('home'))))
         
-        self.fields['password1'].help_text = None
-        self.fields['password2'].help_text = None
-        self.fields['email'].help_text = None
-        self.fields['username'].help_text = None
+        for i in self.fields.values():
+            i.help_text = None
         
 
-# Sign Up Form
+# LoginForm
 class LoginForm(AuthenticationForm):
     class Meta:
         model = Lifter
@@ -43,9 +40,28 @@ class LoginForm(AuthenticationForm):
         self.helper = FormHelper(self)
         
         self.helper.form_method = 'post'
-        self.helper.add_input(Submit('submit', 'Login'))
+        self.helper.add_input(Submit('submit', 'Login', css_class='btn-primary'))
         
         self.helper.add_input(Button('cancel', 'Cancel', css_class='btn-primary',
              onclick="window.location.href = '{}';".format(reverse('home'))))
         
     
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Lifter
+        fields = ['first_name', 'last_name', 'date_of_birth', 'height', 'weight', 'workouts_per_week']
+        
+        
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+                
+        self.helper.form_method = 'post'
+        self.helper.add_input(Submit('submit', 'Save Changes'))
+        
+        self.helper.add_input(Button('cancel', 'Cancel', css_class='btn-primary',
+             onclick="window.location.href = '{}';".format(reverse('home'))))   
+        
+        # Sets every field as required
+        for key in self.fields:
+            self.fields[key].required = True

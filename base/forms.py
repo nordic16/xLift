@@ -1,28 +1,28 @@
 from users.models import Lifter
-from django.forms import ModelForm    
+from .models import Workout
+from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.bootstrap import FormActions
-from crispy_forms.layout import Submit, Button
+from crispy_forms.layout import Submit, Button, Div, MultiField
 from django.shortcuts import reverse
 
-class ProfileForm(ModelForm):
+
+class WorkoutForm(forms.ModelForm):
     class Meta:
-        model = Lifter
-        fields = ['first_name', 'last_name', 'date_of_birth', 'height', 'weight', 'workouts_per_week']
-        
+        model = Workout
+        fields = ['name', 'notes', 'intensity']
         
     def __init__(self, *args, **kwargs):
+        
         super().__init__(*args, **kwargs)
         self.helper = FormHelper(self)
-                
         self.helper.form_method = 'post'
-        self.helper.add_input(Submit('submit', 'Save Changes'))
         
-        self.helper.add_input(Button('cancel', 'Cancel', css_class='btn-primary',
-             onclick="window.location.href = '{}';".format(reverse('home'))))   
+        # TODO: find a way to increase the padding between fields and inputs.
+        self.helper.add_input(Submit('Submit', 'Start'))
+        self.helper.add_input(Submit('Submit', 'Discard', css_class='btn_primary',
+            onclick="window.location.href = '{}';".format(reverse('home'))))
         
-        # Sets every field as required
-        for key in self.fields:
-            self.fields[key].required = True
-
-    
+        self.fields['name'].required = True
+        self.fields['intensity'].required = True
+            
