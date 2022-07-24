@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.contrib import admin
 from django.db import models
 from django.utils import timezone
 from django.core.validators import MaxValueValidator, MinValueValidator 
@@ -34,7 +35,14 @@ class Lifter(AbstractUser):
     USERNAME_FIELD = 'username'
         
     def __str__(self):
-        return f"|{self.username}{self.email}"    
+        return f"{self.username}"    
+
+
+class LifterAdmin(admin.ModelAdmin):
+    search_fields = ['email'] 
+    class Meta:
+        model = Lifter
+
 
 @receiver(pre_save, sender=Lifter)
 def calculate_age(sender, instance, raw=False, **kwargs):

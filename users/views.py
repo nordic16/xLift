@@ -15,11 +15,8 @@ class SignUpView(CreateView):
     form_class = SignUpForm
     model = Lifter
     template_name = 'registration/signup.html'
-    success_url="/"
+    success_url = 'registration/login.html'
     
-    
-            
-        
     
 class LoginView(LoginView):
     form_class = LoginForm
