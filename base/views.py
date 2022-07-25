@@ -20,6 +20,13 @@ def DashboardView(request):
     return render(request, 'dashboard.html', context={'user' : request.user})
 
 
+def workout_page_view(request, id):
+    workout = Workout.objects.get(id=id)
+        
+    return render(request, 'edit_workout.html',
+        context={'workout' : workout})
+
+
 def new_workout(request):
     user = request.user
     if request.method == 'GET':    
@@ -34,12 +41,12 @@ def new_workout(request):
         if form.is_valid():
             data = form.cleaned_data
 
-            Workout.objects.create(intensity=data['intensity'],
+            workout = Workout.objects.create(intensity=data['intensity'],
             name=data['name'],
             notes=data['notes'],
             owner=user)
-        
-            return render(request, 'temp.html')
+                    
+            return redirect(f'/workouts/{workout.id}')
 
 # EXCEPTIONS
 def page_not_found_view(request, exception):

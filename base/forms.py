@@ -3,7 +3,7 @@ from .models import Workout
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.bootstrap import FormActions
-from crispy_forms.layout import Submit, Button, Div, MultiField
+from crispy_forms.layout import Submit, Button
 from django.shortcuts import reverse
 
 
@@ -20,8 +20,8 @@ class WorkoutForm(forms.ModelForm):
         
         # TODO: find a way to increase the padding between fields and inputs.
         self.helper.add_input(Submit('Submit', 'Start'))
-        self.helper.add_input(Submit('Submit', 'Discard', css_class='btn_primary',
-            onclick="window.location.href = '{}';".format(reverse('home'))))
+        self.helper.add_input(Button('Submit', 'Discard', css_class='btn_primary',
+            onclick="window.location.href = '{}';".format(reverse('workouts'))))
         
         self.fields['name'].required = True
         self.fields['intensity'].required = True
