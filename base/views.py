@@ -21,10 +21,22 @@ def DashboardView(request):
 
 
 def workout_page_view(request, id):
-    workout = Workout.objects.get(id=id)
+    if request.method == 'GET':
+        workout = Workout.objects.get(id=id)
         
-    return render(request, 'edit_workout.html',
-        context={'workout' : workout})
+        if workout.owner == request.user:
+            sets = ExSet.objects.filter(workout=workout)
+    
+            return render(request, 'edit_workout.html',
+                context={'workout' : workout, 'sets' : sets })
+            
+        else:
+            return redirect(reverse_lazy('home'))
+        
+    else:
+        return render(request, 'temp.html')
+    
+    
 
 
 def new_workout(request):

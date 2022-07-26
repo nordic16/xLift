@@ -19,10 +19,9 @@ class WorkoutForm(forms.ModelForm):
         self.helper.form_method = 'post'
         
         # TODO: find a way to increase the padding between fields and inputs.
-        self.helper.add_input(Submit('Submit', 'Start'))
+        self.helper.add_input(Submit('Submit', 'Start', css_class='btn_primary'))
         self.helper.add_input(Button('Submit', 'Discard', css_class='btn_primary',
             onclick="window.location.href = '{}';".format(reverse('workouts'))))
         
         self.fields['name'].required = True
         self.fields['intensity'].required = True
-            

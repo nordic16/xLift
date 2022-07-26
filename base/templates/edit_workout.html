@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 
 {% block data %}
+<br>
+{% if sets.count == 0 %}
+<h1>No sets</h1>
+<h3>Let's start by adding some.</h3>
+{% endif %}
 <table class="table">
     <thead>
         
@@ -8,8 +13,28 @@
   </table>
   <br>
   <div class="btn-group" role="group" aria-label="Basic example">
-    <button type="button" class="btn btn-secondary">Add Exercise</button><br>
-    <button type="button" class="btn btn-secondary">Finish Workout</button>
-    <button type="button" class="btn btn-secondary">Discard Workout</button>
+    <form>
+      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+        Add Exercises</button>      
+      
+      <button type="submit" class="btn btn-primary">Finish</button>
+      <button type="button" class="btn btn-primary">Discard</button>
+    </form>
+  </div>
+
+
+  <!-- OFFCANVAS -->
+  <!--IT ACTUALLY WORKS!-->
+
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasExampleLabel">Add exercises</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div>
+        Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
+      </div>
+    </div>
   </div>
   {% endblock %}

@@ -14,7 +14,6 @@ class ExSetTest(TestCase):
         bench_press_set = ExSet.objects.create(exercise=bench_press, weight=50, reps=12, 
             workout=workout)
 
-        
         for i in ExSet.objects.filter(workout=workout):
             print(f'{i.exercise.name} | {i.weight} | {i.reps}')
 
