@@ -5,7 +5,20 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.bootstrap import FormActions
 from crispy_forms.layout import Submit, Button
 from django.shortcuts import reverse
+from base.utils import exercises
 
+
+class AddExerciseForm(forms.Form):
+    Exercises = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, 
+        queryset=exercises, required=False)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_method = 'post'
+        
+        self.helper.add_input(Submit('Submit', 'Add Exercises', css_class='btn-primary'))
+        
 
 class WorkoutForm(forms.ModelForm):
     class Meta:

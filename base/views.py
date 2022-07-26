@@ -1,9 +1,10 @@
 from .models import *
-from .forms import WorkoutForm
+from .forms import WorkoutForm, AddExerciseForm
 from users.models import Lifter
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse_lazy
+from base import utils
 
 
 def index_page(request):
@@ -21,20 +22,37 @@ def DashboardView(request):
 
 
 def workout_page_view(request, id):
-    if request.method == 'GET':
-        workout = Workout.objects.get(id=id)
-        
-        if workout.owner == request.user:
-            sets = ExSet.objects.filter(workout=workout)
+    workout = Workout.objects.get(id=id)
     
+    if request.method == 'GET':        
+        if workout.owner == request.user:
+            form = AddExerciseForm()
+            sets = ExSet.objects.filter(workout=workout)
+            
             return render(request, 'edit_workout.html',
-                context={'workout' : workout, 'sets' : sets })
+                context={'form' : form, 'sets' : sets})
+
+            #return render(request, 'edit_workout.html',
+             #   context={'workout' : workout, 'sets' : sets, 
+              #           'exercises' : utils.exercises})
             
         else:
             return redirect(reverse_lazy('home'))
         
     else:
-        return render(request, 'temp.html')
+        form = AddExerciseForm(request.POST)
+        
+        if form.is_valid():
+            data = form.cleaned_data
+            
+            for ex in data["Exercises"]:
+                print(ex.name)
+                
+                # Creates a set for each exercise.
+                exset = ExSet.objects.create(exercise=ex, reps=0, weight=0, workout=workout)
+                exset.save()
+            
+            return redirect(f'/workouts/{id}')
     
     
 

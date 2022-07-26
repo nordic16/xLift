@@ -1,14 +1,16 @@
 {% extends 'base.html' %}
-
+{% load crispy_forms_tags %}
 {% block data %}
 <br>
 {% if sets.count == 0 %}
-<h1>No sets</h1>
-<h3>Let's start by adding some.</h3>
+<h1>No exercises</h1>
+<h5>Let's start by adding some.</h5>
 {% endif %}
 <table class="table">
     <thead>
-        
+        {% for i in sets %}
+          <p>{{ i.exercise.name }}</p>
+        {% endfor %}
     </thead>
   </table>
   <br>
@@ -31,10 +33,9 @@
       <h5 class="offcanvas-title" id="offcanvasExampleLabel">Add exercises</h5>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <div class="offcanvas-body">
-      <div>
-        Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
-      </div>
+    <div class="offcanvas-body"; display: flex;
+    justify-content: center;>
+      {% crispy form %}
     </div>
   </div>
   {% endblock %}
