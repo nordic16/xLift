@@ -32,31 +32,31 @@ def workout_page_view(request, id):
             return render(request, 'edit_workout.html',
                 context={'form' : form, 'sets' : sets})
 
-            #return render(request, 'edit_workout.html',
-             #   context={'workout' : workout, 'sets' : sets, 
-              #           'exercises' : utils.exercises})
-            
         else:
             return redirect(reverse_lazy('home'))
         
     else:
         form = AddExerciseForm(request.POST)
-        
+                
         if form.is_valid():
             data = form.cleaned_data
             
             for ex in data["Exercises"]:
                 print(ex.name)
                 
-                # Creates a set for each exercise.
-                exset = ExSet.objects.create(exercise=ex, reps=0, weight=0, workout=workout)
-                exset.save()
+                # If exercise is already in the workout, add another set
+                temp_set = ExSet.objects.filter(exercise=ex)
+                if temp_set:
+                    temp_set[0].number += 1
+                    temp_set[0].save()
+                    
+                else:
+                    exset = ExSet.objects.create(exercise=ex, reps=0, weight=0, workout=workout)
+                    exset.save()
             
             return redirect(f'/workouts/{id}')
     
     
-
-
 def new_workout(request):
     user = request.user
     if request.method == 'GET':    
@@ -77,6 +77,7 @@ def new_workout(request):
             owner=user)
                     
             return redirect(f'/workouts/{workout.id}')
+
 
 # EXCEPTIONS
 def page_not_found_view(request, exception):

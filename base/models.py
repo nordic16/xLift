@@ -37,6 +37,7 @@ class Exercise(models.Model):
 
 # Exercise set.
 class ExSet(models.Model):
+    number = models.SmallIntegerField(default=1)
     weight = models.IntegerField()
     reps = models.IntegerField()
     exercise = models.ForeignKey(Exercise, models.CASCADE)
