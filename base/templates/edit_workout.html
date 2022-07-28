@@ -1,28 +1,41 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% load custom_templates %}
 {% block data %}
-<br>
 {% if sets.count == 0 %}
-<h1>No exercises</h1>
-<h5>Let's start by adding some.</h5>
+  <h1>No exercises</h1>
+  <h5>Let's start by adding some.</h5>
 {% endif %}
-<table class="table">
-    <thead>
-        {% for i in sets %}
-          <p>{{ i.exercise.name }}: {{ i.number }} sets</p>
+{% for i in sets %}
+  {% if i.exercise.category == "2" %}
+    <table class="table" style="width: 90%;">
+      <tr>
+        <th style="width: 250px;">{{ i.exercise.name }}</th>
+        <th width: 250px;>Weight</th>
+        <th width: 250px;>Reps</th>
+      </tr>
+
+      {% num_range i.number as range %}
+        {% for item in range %}
+          <tr>
+            <th>#{{ item }}</th>
+            <th contenteditable>{{ i.weight }}</th>
+            <th contenteditable>{{ i.reps }}</th>
+          </tr>
         {% endfor %}
-    </thead>
-  </table>
-  <br>
-  <div class="btn-group" role="group" aria-label="Basic example">
-    <form>
-      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-        Add Exercises</button>      
-      
-      <button type="submit" class="btn btn-primary">Finish</button>
-      <button type="button" class="btn btn-primary">Discard</button>
-    </form>
-  </div>
+    </table>
+  {% endif %}
+{% endfor %}
+
+<div class="btn-group" role="group" aria-label="Basic example">
+<form>
+  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+    Add Exercises</button>      
+  
+  <button type="submit" class="btn btn-primary">Finish</button>
+  <button type="button" class="btn btn-primary">Discard</button>
+</form>
+</div>
 
 
   <!-- OFFCANVAS -->
@@ -38,4 +51,4 @@
       {% crispy form %}
     </div>
   </div>
-  {% endblock %}
+{% endblock %}

@@ -20,7 +20,7 @@ class AddExerciseForm(forms.Form):
         self.helper.add_input(Submit('Submit', 'Add Exercises', css_class='btn-primary'))
         
 
-class WorkoutForm(forms.ModelForm):
+class WorkoutCreationForm(forms.ModelForm):
     class Meta:
         model = Workout
         fields = ['name', 'notes', 'intensity']

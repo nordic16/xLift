@@ -1,5 +1,5 @@
 from .models import *
-from .forms import WorkoutForm, AddExerciseForm
+from .forms import WorkoutCreationForm, AddExerciseForm
 from users.models import Lifter
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render, get_object_or_404
@@ -45,10 +45,10 @@ def workout_page_view(request, id):
                 print(ex.name)
                 
                 # If exercise is already in the workout, add another set
-                temp_set = ExSet.objects.filter(exercise=ex)
-                if temp_set:
-                    temp_set[0].number += 1
-                    temp_set[0].save()
+                exset = ExSet.objects.filter(exercise=ex)
+                if exset:
+                    exset[0].number += 1
+                    exset[0].save()
                     
                 else:
                     exset = ExSet.objects.create(exercise=ex, reps=0, weight=0, workout=workout)
@@ -60,13 +60,13 @@ def workout_page_view(request, id):
 def new_workout(request):
     user = request.user
     if request.method == 'GET':    
-        form = WorkoutForm()
+        form = WorkoutCreationForm()
         
         if user.is_authenticated:
             return render(request, 'workout_creation.html', context={'form' : form})
 
     else:
-        form = WorkoutForm(request.POST)
+        form = WorkoutCreationForm(request.POST)
         
         if form.is_valid():
             data = form.cleaned_data
