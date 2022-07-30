@@ -2,10 +2,12 @@
 {% load crispy_forms_tags %}
 {% load custom_templates %}
 {% block data %}
+
 {% if sets.count == 0 %}
   <h1>No exercises</h1>
   <h5>Let's start by adding some.</h5>
 {% endif %}
+
 {% for i in sets %}
   {% if i.exercise.category == "2" %}
     <table class="table" style="width: 90%;">
@@ -15,10 +17,9 @@
         <th width: 250px;>Reps</th>
       </tr>
 
-      {% num_range i.number as range %}
-        {% for item in range %}
+      {% for i in ''|rjust:i.number %}          
           <tr>
-            <th>#{{ item }}</th>
+            <th>#{{ forloop.counter }}</th>
             <th contenteditable>{{ i.weight }}</th>
             <th contenteditable>{{ i.reps }}</th>
           </tr>
