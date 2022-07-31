@@ -100,10 +100,10 @@ def page_not_found_view(request, exception):
 
 def overview_page_view(request, id):
     workout = Workout.objects.get(id=id)
+    sets = ExSet.objects.filter(workout=workout)
     
-    started = datetime.combine(datetime.now().date(), workout.time_started)
-    time_taken = datetime.now() - started
-    print(time_taken)
+    intensity= INTENSITY_CHOICES[int(workout.intensity) - 1][1]
     
     return render(request, 'workout/workout_overview.html', 
-        context={'workout' : workout})
+        context={'workout' : workout, 
+            'intensity' : intensity, 'sets' : sets})
