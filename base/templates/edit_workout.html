@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
-{% load custom_templates %}
 {% block data %}
 
 {% if sets.count == 0 %}
@@ -10,18 +9,18 @@
 
 {% for i in sets %}
   {% if i.exercise.category == "2" %}
-    <table class="table" style="width: 90%;">
+    <table class="table" style="width: 75%;">
       <tr>
-        <th style="width: 250px;">{{ i.exercise.name }}</th>
-        <th width: 250px;>Weight</th>
-        <th width: 250px;>Reps</th>
+        <th style="width: 60%;">{{ i.exercise.name }}</th>
+        <th width: 170px;>Weight</th>
+        <th width: 170px;>Reps</th>
       </tr>
 
       {% for i in ''|rjust:i.number %}          
           <tr>
             <th>#{{ forloop.counter }}</th>
-            <th contenteditable>{{ i.weight }}</th>
-            <th contenteditable>{{ i.reps }}</th>
+            <th contenteditable style="width: 80px;">{{ i.weight }}</th>
+            <th contenteditable style="width: 80px;">{{ i.reps }}</th>
           </tr>
         {% endfor %}
     </table>
@@ -29,12 +28,15 @@
 {% endfor %}
 
 <div class="btn-group" role="group" aria-label="Basic example">
-<form>
+<form method="post" action="#">
+  {% csrf_token %}
   <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
     Add Exercises</button>      
   
-  <button type="submit" class="btn btn-primary">Finish</button>
-  <button type="button" class="btn btn-primary">Discard</button>
+  {% if sets.count != 0 %}
+    <button type="submit" name="finish" value="finish" class="btn btn-primary">Finish</button>
+  {% endif %}
+    <button type="submit" name="discard" value="discard" class="btn btn-primary">Discard</button>
 </form>
 </div>
 

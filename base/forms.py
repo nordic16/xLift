@@ -17,7 +17,7 @@ class AddExerciseForm(forms.Form):
         self.helper = FormHelper(self)
         self.helper.form_method = 'post'
         
-        self.helper.add_input(Submit('Submit', 'Add Exercises', css_class='btn-primary'))
+        self.helper.add_input(Submit('add-exercise', 'Add Exercises', css_class='btn-primary'))
         
 
 class WorkoutCreationForm(forms.ModelForm):
@@ -31,7 +31,6 @@ class WorkoutCreationForm(forms.ModelForm):
         self.helper = FormHelper(self)
         self.helper.form_method = 'post'
         
-        # TODO: find a way to increase the padding between fields and inputs.
         self.helper.add_input(Submit('Submit', 'Start', css_class='btn_primary'))
         self.helper.add_input(Button('Submit', 'Discard', css_class='btn_primary',
             onclick="window.location.href = '{}';".format(reverse('workouts'))))
