@@ -1,5 +1,5 @@
 from django.urls import path, include
-from base.views import index_page, workouts_page, DashboardView, new_workout, workout_page_view
+from base.views import index_page, workouts_page, DashboardView, new_workout, workout_page_view, overview_page_view
 
 urlpatterns = [
     path('', index_page, name='home'),   
@@ -8,6 +8,7 @@ urlpatterns = [
     path('workouts/new', new_workout, name='new'),    
     
     path('workouts/<int:id>', workout_page_view, name='workout'),
+    path('workouts/<int:id>/overview', overview_page_view, name='overview'),
     
     path('lifters/', include('users.urls')),
     

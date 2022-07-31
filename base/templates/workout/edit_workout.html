@@ -9,18 +9,18 @@
 
 {% for i in sets %}
   {% if i.exercise.category == "2" %}
-    <table class="table" style="width: 75%;">
+    <table name="test" class="table" style="width: 75%;">
       <tr>
         <th style="width: 60%;">{{ i.exercise.name }}</th>
         <th width: 170px;>Weight</th>
         <th width: 170px;>Reps</th>
       </tr>
 
-      {% for i in ''|rjust:i.number %}          
-          <tr>
+      {% for w in ''|rjust:i.number %}          
+          <tr name="{{ i.exercise.name }}">
             <th>#{{ forloop.counter }}</th>
-            <th contenteditable style="width: 80px;">{{ i.weight }}</th>
-            <th contenteditable style="width: 80px;">{{ i.reps }}</th>
+            <th contenteditable name="{{ i.exercise.name }}_w" style="width: 80px;">{{ i.weight }}</th>
+            <th contenteditable name="{{ i.exercise.name }}_r" style="width: 80px;">{{ i.reps }}</th>
           </tr>
         {% endfor %}
     </table>
@@ -33,6 +33,7 @@
   <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
     Add Exercises</button>      
   
+    <!--Cannot allow the user to "finish" an empty workout-->
   {% if sets.count != 0 %}
     <button type="submit" name="finish" value="finish" class="btn btn-primary">Finish</button>
   {% endif %}

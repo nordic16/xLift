@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse_lazy
 from base import utils
+from django.utils import timezone
 
 
 def index_page(request):
@@ -14,7 +15,7 @@ def index_page(request):
     
 def workouts_page(request):
     if request.method == 'GET':
-        return render(request, template_name='workouts.html')
+        return render(request, template_name='workout/workouts.html')
     
 
 def DashboardView(request):        
@@ -29,7 +30,7 @@ def workout_page_view(request, id):
             form = AddExerciseForm()
             sets = ExSet.objects.filter(workout=workout)
             
-            return render(request, 'edit_workout.html',
+            return render(request, 'workout/edit_workout.html',
                 context={'form' : form, 'sets' : sets, 'id' : id})
 
         else:
@@ -59,8 +60,12 @@ def workout_page_view(request, id):
                 workout.delete()
                 return redirect(reverse_lazy('workouts'))
 
+            # Finishes workout and, redirects the user to an overview page
             elif request.POST.get('finish'):
-                print(workout.get_total_volume())
+                # workout.active = False
+                workout.save()
+                
+                return redirect(f'/workouts/{id}/overview')
             
             
             return render(request, 'temp.html')
@@ -72,7 +77,7 @@ def new_workout(request):
         form = WorkoutCreationForm()
         
         if user.is_authenticated:
-            return render(request, 'workout_creation.html', context={'form' : form})
+            return render(request, 'workout/workout_creation.html', context={'form' : form})
 
     else:
         form = WorkoutCreationForm(request.POST)
@@ -93,3 +98,12 @@ def page_not_found_view(request, exception):
      return render(request, 'errors/404.html')
  
 
+def overview_page_view(request, id):
+    workout = Workout.objects.get(id=id)
+    
+    started = datetime.combine(datetime.now().date(), workout.time_started)
+    time_taken = datetime.now() - started
+    print(time_taken)
+    
+    return render(request, 'workout/workout_overview.html', 
+        context={'workout' : workout})

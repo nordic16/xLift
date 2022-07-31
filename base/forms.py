@@ -4,7 +4,7 @@ from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.bootstrap import FormActions
 from crispy_forms.layout import Submit, Button
-from django.shortcuts import reverse
+from django.urls import reverse_lazy
 from base.utils import exercises
 
 
@@ -33,7 +33,7 @@ class WorkoutCreationForm(forms.ModelForm):
         
         self.helper.add_input(Submit('Submit', 'Start', css_class='btn_primary'))
         self.helper.add_input(Button('Submit', 'Discard', css_class='btn_primary',
-            onclick="window.location.href = '{}';".format(reverse('workouts'))))
+            onclick="window.location.href = '{}';".format(reverse_lazy('workouts'))))
         
         self.fields['name'].required = True
         self.fields['intensity'].required = True

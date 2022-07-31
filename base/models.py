@@ -1,6 +1,6 @@
 from django.db import models
 from users.models import Lifter
-from django.utils import timezone
+from django.utils.timezone import datetime
 
 INTENSITY_CHOICES = (
     ("1", "Easy"),
@@ -22,7 +22,8 @@ class Workout(models.Model):
     notes = models.TextField(max_length=500, blank=True)
     owner = models.ForeignKey(Lifter, on_delete=models.CASCADE, null=True)
     active = models.BooleanField(default=True)
-    time_started = models.TimeField(default=timezone.now())
+    time_started = models.DateTimeField(default=datetime.now())
+    time_ended = models.DateTimeField(null=True)
     
     def get_total_volume(self):
         exercises = ExSet.objects.filter(workout=self)

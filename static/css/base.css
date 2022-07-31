@@ -56,3 +56,8 @@
 .btn-group {
     margin-right: 20px;
 }
+
+.overview-container {
+    width: 95%;
+    margin-top: 10px; 
+}
