@@ -50,5 +50,5 @@ class ExSet(models.Model):
     number = models.SmallIntegerField(default=1)
     weight = models.IntegerField()
     reps = models.IntegerField()
-    exercise = models.ForeignKey(Exercise, models.CASCADE)
+    exercise = models.ForeignKey(Exercise, models.PROTECT)
     workout = models.ForeignKey(Workout, on_delete=models.CASCADE, null=True)

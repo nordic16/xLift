@@ -41,10 +41,11 @@ def workout_page_view(request, id):
         if form.is_valid():
             if request.POST.get('add-exercise'):    
                 data = form.cleaned_data
-                
+
                 for ex in data["Exercises"]:                
                     # If exercise is already in the workout, add another set
-                    exset = ExSet.objects.filter(exercise=ex)
+                    exset = ExSet.objects.filter(exercise=ex, workout=workout)
+                    
                     if exset:
                         exset[0].number += 1
                         exset[0].save()
