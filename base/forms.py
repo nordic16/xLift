@@ -23,7 +23,7 @@ class AddExerciseForm(forms.Form):
 class WorkoutCreationForm(forms.ModelForm):
     class Meta:
         model = Workout
-        fields = ['name', 'notes', 'intensity']
+        fields = ['name', 'notes']
         
     def __init__(self, *args, **kwargs):
         
@@ -36,4 +36,3 @@ class WorkoutCreationForm(forms.ModelForm):
             onclick="window.location.href = '{}';".format(reverse_lazy('workouts'))))
         
         self.fields['name'].required = True
-        self.fields['intensity'].required = True

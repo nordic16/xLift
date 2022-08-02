@@ -8,17 +8,17 @@ from base import utils
 from django.utils import timezone
 
 
-def index_page(request):
+def index_page_view(request):
     if request.method == 'GET':
         return render(request, template_name='index.html', context={'user' : request.user})
     
     
-def workouts_page(request):
+def workouts_page_view(request):
     if request.method == 'GET':
         return render(request, template_name='workout/workouts.html')
     
 
-def DashboardView(request):        
+def dashboard_view(request):        
     return render(request, 'dashboard.html', context={'user' : request.user})
 
 
@@ -72,7 +72,7 @@ def workout_page_view(request, id):
             return render(request, 'temp.html')
 
 
-def new_workout(request):
+def new_workout_view(request):
     user = request.user
     if request.method == 'GET':    
         form = WorkoutCreationForm()
@@ -86,10 +86,11 @@ def new_workout(request):
         if form.is_valid():
             data = form.cleaned_data
 
-            workout = Workout.objects.create(intensity=data['intensity'],
-            name=data['name'],
+            workout = Workout.objects.create(name=data['name'],
             notes=data['notes'],
             owner=user)
+                    
+            
                     
             return redirect(f'/workouts/{workout.id}')
 

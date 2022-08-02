@@ -17,7 +17,7 @@ WORKOUT_CATEGORIES = (
 
 # Create your models here.
 class Workout(models.Model):
-    intensity = models.CharField(choices=INTENSITY_CHOICES, max_length=22, default="Weighted")
+    intensity = models.CharField(choices=INTENSITY_CHOICES, max_length=22, default=1)
     name = models.CharField(max_length=32)
     notes = models.TextField(max_length=500, blank=True)
     owner = models.ForeignKey(Lifter, on_delete=models.CASCADE, null=True)

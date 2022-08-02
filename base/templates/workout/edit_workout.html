@@ -19,8 +19,8 @@
       {% for w in ''|rjust:i.number %}          
           <tr name="{{ i.exercise.name }}">
             <th>#{{ forloop.counter }}</th>
-            <th contenteditable name="{{ i.exercise.name }}_w" style="width: 80px;">{{ i.weight }}</th>
-            <th contenteditable name="{{ i.exercise.name }}_r" style="width: 80px;">{{ i.reps }}</th>
+            <th contenteditable aria-required name="{{ i.exercise.name }}_w" style="width: 80px;">{{ i.weight }}</th>
+            <th contenteditable required name="{{ i.exercise.name }}_r" style="width: 80px;">{{ i.reps }}</th>
           </tr>
         {% endfor %}
     </table>
